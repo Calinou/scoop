@@ -2,8 +2,16 @@
     "version": "5.2.0.224",
     "homepage": "http://www.mono-project.com/",
     "license": "https://raw.githubusercontent.com/mono/mono/master/LICENSE",
-    "url": "https://download.mono-project.com/archive/5.2.0/windows-installer/mono-5.2.0.224-gtksharp-2.12.45-win32-0.msi",
-    "hash": "a9dc6360dad6fe47d596ae73a34750dd2dcd34210c84cef5e3109074c3673bb8",
+    "architecture": {
+        "64bit": {
+            "url": "https://download.mono-project.com/archive/5.2.0/windows-installer/mono-5.2.0.224-x64-0.msi",
+            "hash": "dba752e9f69fa4a53e94dec12fe9ebbbe298d976109afa6bd2d69fad775aa768"
+        },
+        "32bit": {
+            "url": "https://download.mono-project.com/archive/5.2.0/windows-installer/mono-5.2.0.224-gtksharp-2.12.45-win32-0.msi",
+            "hash": "a9dc6360dad6fe47d596ae73a34750dd2dcd34210c84cef5e3109074c3673bb8"
+        }
+    },
     "extract_dir": "Mono",
     "env_add_path": "bin",
     "checkver": {
@@ -11,6 +19,13 @@
         "re": "(?<short>[\\d.]+)/windows-installer/(?<file>mono-(?<version>[\\d.]+).*win32.*).msi"
     },
     "autoupdate": {
-        "url": "https://download.mono-project.com/archive/$matchShort/windows-installer/$matchFile.msi"
+        "architecture": {
+            "64bit": {
+                "url": "https://download.mono-project.com/archive/$matchShort/windows-installer/$matchFile.msi"
+            },
+            "32bit": {
+                "url": "https://download.mono-project.com/archive/$matchShort/windows-installer/$matchFile.msi"
+            }
+        }
     }
 }
