@@ -1,0 +1,39 @@
+{
+    "homepage": "https://github.com/dom96/choosenim",
+    "description": "Install and manage multiple versions of the Nim compiler and tools",
+    "license": "MIT",
+    "version": "0.3.2",
+    "url": [
+        "https://github.com/dom96/choosenim/releases/download/v0.3.2/choosenim-0.3.2_windows_i386.zip",
+        "https://nim-lang.org/download/dlls.zip"
+    ],
+    "hash": [
+        "23674597841180e9affd471ed555df30684f947b1a286b3b584b4c37c1fe7cc0",
+        "198112d3d6dc74d7964ba452158d44bfa57adef4dc47be8c39903f2a24e4a555"
+    ],
+    "installer": {
+        "script": [
+            "add_first_in_path \"$env:USERPROFILE\\.nimble\\bin\" $global",
+            "$env:CHOOSENIM_NO_ANALYTICS=1",
+            "& \"$dir\\choosenim\\choosenim.exe\" stable",
+            "Copy-Item -Force \"$dir\\choosenim\\choosenim.exe\" \"$env:USERPROFILE\\.nimble\\bin\"",
+            "Move-Item -Force \"$dir\\*.dll\" \"$env:USERPROFILE\\.nimble\\bin\""
+        ]
+    },
+    "uninstaller": {
+        "script": [
+            "remove_from_path \"$env:USERPROFILE\\.nimble\\bin\" $global",
+            "Remove-Item -Recurse -ErrorAction SilentlyContinue \"$env:USERPROFILE\\.choosenim\", \"$env:USERPROFILE\\.nimble\\bin\\choosenim.exe\", \"$env:USERPROFILE\\.nimble\\bin\\g++.exe\", \"$env:USERPROFILE\\.nimble\\bin\\gcc.exe\", \"$env:USERPROFILE\\.nimble\\bin\\gdb.exe\", \"$env:USERPROFILE\\.nimble\\bin\\ld.exe\""
+        ]
+    },
+    "checkver": {
+        "github": "https://github.com/dom96/choosenim",
+        "re": ">v([a-z\\d.-]+)<"
+    },
+    "autoupdate": {
+        "url": "https://github.com/dom96/choosenim/releases/download/v$version/choosenim-$version_windows_i386.zip"
+    },
+    "depends": [
+        "git"
+    ]
+}
